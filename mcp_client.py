@@ -48,8 +48,9 @@ async def create_graph(session):
 
     # Define chat node
     def chat_node(state: State) -> State:
-        state["messages"] = chat_llm.invoke({"messages": state["messages"]})
-        return state
+        # state["messages"] = chat_llm.invoke({"messages": state["messages"]})
+        response = chat_llm.invoke({"messages": state["messages"]})
+        return {"messages": response}
 
     # Build LangGraph with tool routing
     graph = StateGraph(State)
